@@ -1,5 +1,6 @@
 " Better :grep
-set grepprg=rg\ --vimgrep
+set grepprg=rg\ --vimgrep\ --follow\ --max-columns=1000\ --case-sensitive
+set grepformat=%f:%l:%c:%m,%f:%l:%m
 function! Grep(...)
   return system(join([&grepprg] + a:000), ' ')
 endfunction
@@ -9,7 +10,7 @@ augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost cgetexpr cwindow
 augroup END
-nmap <c-f> :Grep<space>
-nmap <leader>f :GrepWord<space><c-r><c-w><cr>
-vmap <leader>f "9y:Grep<space>'<c-r>9'<cr>
+nmap <c-f> :Grep<space><space>.<left><left>
+nmap <leader>f :GrepWord<space><c-r><c-w><space>.<cr>
+vmap <leader>f "9y:Grep<space>'<c-r>9'<space>.<cr>
 
